@@ -127,7 +127,7 @@ class PhysicalProduct extends Product {
    * @returns {string}
    */
   getInformationProduct() {
-    return `name of physical product: ${this.name}, price: ${this.price} ${this.currency}, quantity: ${this.quantity}, weight: ${this.weight}`;
+    return `${super.getInformationProduct()}, weight: ${this.weight}`;
   }
 }
 
@@ -161,7 +161,7 @@ class VirtualProduct extends Product {
    * @returns {string}
    */
   getInformationProduct() {
-    return `name of virtual product: ${this.name}, price: ${this.price} ${this.currency}, quantity: ${this.quantity}, memorySize: ${this.memorySize}`;
+    return `${super.getInformationProduct()}, memorySize: ${this.memorySize}`;
   }
 }
 
@@ -173,14 +173,19 @@ try {
   //console.log(product.buyProduct(100)); //RangeError: insufficient quantity of goods in stock. enter a lower value
 
   const physicalProduct = new PhysicalProduct("water", 2, "₴", 2000, 250);
-  console.log(physicalProduct.getInformationProduct()); // name of physical product: water, price: 2 ₴, quantity: 1000, weight: 250
+  console.log(physicalProduct.getInformationProduct()); // name: water, price: 2 ₴, quantity: 1000, weight: 250
   console.log(physicalProduct.buyProduct(2)); // to pay: 4 ₴
   console.log(physicalProduct.quantity); // 1998
   console.log(physicalProduct.buyProduct(100)); // to pay: 200 ₴
   console.log(physicalProduct.quantity); // 1898
 
   const virtualProduct = new VirtualProduct("excel", 99, "€", 5000, 250);
-  console.log(virtualProduct.getInformationProduct()); // name of virtual product: excel, price: 99 $, quantity: 5000, memorySize: 250
+  console.log(virtualProduct.getInformationProduct()); // name: excel, price: 99 $, quantity: 5000, memorySize: 250
+  console.log(virtualProduct.buyProduct(1)); // to pay: 99 €
+  console.log(virtualProduct.quantity); // 4999
+} catch (error) {
+  console.log(error);
+}
   console.log(virtualProduct.buyProduct(1)); // to pay: 99 €
   console.log(virtualProduct.quantity); // 4999
 } catch (error) {
